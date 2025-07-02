@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Ordering
@@ -11,6 +12,12 @@ namespace Ordering
             // Example: services.AddScoped<ICatalogService, CatalogService>();
 
             return services;
+        }
+
+        public static IApplicationBuilder UseOrderingModule(this IApplicationBuilder app)
+        {
+
+            return app;
         }
     }
 }
