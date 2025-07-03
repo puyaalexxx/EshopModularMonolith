@@ -16,6 +16,8 @@ services:
 
   eshop-api:
     image: ${DOCKER_REGISTRY-}api
+    depends_on:
+      - eshopdb
     build:
       context: .
       dockerfile: src/Bootstrapper/Api/Dockerfile

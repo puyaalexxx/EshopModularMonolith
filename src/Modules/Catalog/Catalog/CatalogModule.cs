@@ -1,8 +1,10 @@
-﻿using Catalog.Data;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Shared.Data;
+using Shared.Data.Interceptors;
+using Shared.Data.Seed;
 
 namespace Catalog
 {
@@ -10,10 +12,25 @@ namespace Catalog
     {
         public static IServiceCollection AddCatalogModule(this IServiceCollection services, IConfiguration configuration)
         {
+            //Application use case services
+            services.AddMediatR(configuration =>
+                configuration.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly())
+            );
+
+
             //Data - Infrastructure services
             var connectionString = configuration.GetConnectionString("Database");
 
-            services.AddDbContext<CatalogDbContext>(options => options.UseNpgsql(connectionString));
+            services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptor>();
+            services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
+
+            services.AddDbContext<CatalogDbContext>((sp, options) =>
+            {
+                options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
+                options.UseNpgsql(connectionString);
+            });
+
+            services.AddScoped<IDataSeeder, CatalogDataSeeder>();
 
             return services;
         }

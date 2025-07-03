@@ -21,4 +21,4 @@ app
     .UseOrderingModule();
 
 
-await app.RunAsync();
+app.Run();
