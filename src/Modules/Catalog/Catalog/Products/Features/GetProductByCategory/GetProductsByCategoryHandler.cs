@@ -1,7 +1,4 @@
-﻿
-using Mapster;
-
-namespace Catalog.Products.Features.GetProductsByCategory
+﻿namespace Catalog.Products.Features.GetProductsByCategory
 {
     public record class GetProductsByCategoryQuery(string Category) : IQuery<GetProductsByCategoryResult>;
 
@@ -15,7 +12,8 @@ namespace Catalog.Products.Features.GetProductsByCategory
             //get products
             var products = await dbContext.Products
                 .AsNoTracking()
-                .OrderBy(p => p.Category.Contains(query.Category))
+                .Where(p => p.Category.Contains(query.Category))
+                .OrderBy(p => p.Name)
                 .ToListAsync(cancellationToken);
 
             //mapping product entity to productDto

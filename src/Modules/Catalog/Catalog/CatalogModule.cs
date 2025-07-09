@@ -17,7 +17,6 @@ namespace Catalog
                 configuration.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly())
             );
 
-
             //Data - Infrastructure services
             var connectionString = configuration.GetConnectionString("Database");
 

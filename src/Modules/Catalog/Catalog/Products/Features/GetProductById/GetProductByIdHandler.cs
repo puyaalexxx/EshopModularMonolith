@@ -1,11 +1,8 @@
-﻿
-using Mapster;
-
-namespace Catalog.Products.Features.GetProductById
+﻿namespace Catalog.Products.Features.GetProductById
 {
     public record class GetProductByIdQuery(Guid Id) : IQuery<GetProductByIdResult>;
 
-    public record GetProductByIdResult(ProductDto Products);
+    public record GetProductByIdResult(ProductDto Product);
 
     public class GetProductsByCategoryHandler(CatalogDbContext dbContext) : IQueryHandler<GetProductByIdQuery, GetProductByIdResult>
     {

@@ -4,7 +4,7 @@ namespace Catalog.Products.Features.UpdateProduct
 {
     public record UpdateProductCommand(ProductDto Product) : ICommand<UpdateProductResult>;
 
-    public record UpdateProductResult(Guid Id);
+    public record UpdateProductResult(bool IsSuccess);
 
     public class DeleteProductHandler(CatalogDbContext dbContext) : ICommandHandler<UpdateProductCommand, UpdateProductResult>
     {
@@ -25,7 +25,7 @@ namespace Catalog.Products.Features.UpdateProduct
             await dbContext.SaveChangesAsync(cancellationToken);
 
             //return result
-            return new UpdateProductResult(product.Id);
+            return new UpdateProductResult(true);
         }
 
         private void UpdateProductWithNewValues(Product product, ProductDto productDto)
