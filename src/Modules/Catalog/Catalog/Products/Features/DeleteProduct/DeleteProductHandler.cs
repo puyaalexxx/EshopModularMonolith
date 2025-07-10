@@ -15,7 +15,7 @@ namespace Catalog.Products.Features.DeleteProduct
 
             if (product is null)
             {
-                throw new Exception($"Product with ID {command.ProductId} not found.");
+                throw new ProductNotFoundException(command.ProductId);
             }
 
             //save to database
