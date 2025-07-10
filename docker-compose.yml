@@ -4,9 +4,9 @@ services:
 
  # distributedcache:
  #   image: redis
-
- # seq:
- #   image: datalust/seq:latest
+  
+  eshop-seq:
+    image: datalust/seq:latest
 
  # messagebus:
  #   image: rabbitmq:management
@@ -15,18 +15,7 @@ services:
  #   image: quay.io/keycloak/keycloak:24.0.3
 
   eshop-api:
-    image: ${DOCKER_REGISTRY-}api
-    depends_on:
-      - eshopdb
-    ports:
-      - "5000:5000"  # HTTP port
-      - "5050:5050"  # HTTPS port
-    environment:
-      - ASPNETCORE_URLS=https://+:5050;http://+:5000
-      - ASPNETCORE_Kestrel__Certificates__Default__Password=awesomepass
-      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/eshopmodularmodulith.pfx
-    volumes:
-      - ${USERPROFILE}/.aspnet/https:/https:ro
+    image: ${DOCKER_REGISTRY-}api 
     build:
       context: .
       dockerfile: src/Bootstrapper/Api/Dockerfile

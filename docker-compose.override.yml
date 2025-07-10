@@ -10,3 +10,49 @@ services:
       - "5432:5432"
     volumes:
       - postgres_eshopdb:/var/lib/postgresql/data/
+
+  eshop-seq:
+    container_name: seq
+    environment:
+      - ACCEPT_EULA=Y
+      - SEQ_API_CANONICALURI=https://seq.example.com
+      - SEQ_FIRSTRUN_ADMINUSERNAME=admin
+      #pass - 11111
+      - SEQ_FIRSTRUN_ADMINPASSWORDHASH=QH8NOzO/AnYQmjoHClWpGBqixU57+rbJLp7LfrgYP+IrB4eHtlTXl5Aqb0PZm7JXvHNsTtXFwQO63U4z0vnmFQgCTPCBsGYF57CkCmXGyP5w
+    restart: always
+    ports:
+      - "5341:5341"
+      - "9091:80"
+
+  eshop-api:
+    ports:
+      - "5000:5000"  # HTTP port
+      - "5050:5050"  # HTTPS port
+    environment:
+      - ASPNETCORE_URLS=https://+:5050;http://+:5000
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=awesomepass
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/eshopmodularmodulith.pfx
+      - ASPNETCORE_ENVIRONMENT=Development
+
+      - Serilog__Using__0=Serilog.Sinks.Console
+      - Serilog__Using__1=Serilog.Sinks.Seq
+      - Serilog__MinimumLevel__Default=Information
+      - Serilog__MinimumLevel__Override__Microsoft=Information
+      - Serilog__MinimumLevel__Override__System=Warning
+      - Serilog__WriteTo__0__Name=Console
+      - Serilog__WriteTo__1__Name=Seq
+      - Serilog__WriteTo__1__Args__serverUrl=http://seq:5341
+      - Serilog__Enrich__0=FromLogContext
+      - Serilog__Enrich__1=WithMachineName
+      - Serilog__Enrich__2=WithProcessId
+      - Serilog__Enrich__3=WithThreadId
+      - Serilog__Properties__Application=EShop ASP.NET Core App
+      - Serilog__Properties__Environment=Development
+    depends_on:
+      - eshopdb
+     # - distributedcache
+      - eshop-seq
+    #  - messagebus
+    #  - identity
+    volumes:
+      - ${USERPROFILE}/.aspnet/https:/https:ro
