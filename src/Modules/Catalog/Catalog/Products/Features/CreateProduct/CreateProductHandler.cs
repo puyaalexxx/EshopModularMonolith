@@ -1,4 +1,4 @@
-﻿
+﻿using Microsoft.Extensions.Logging;
 
 namespace Catalog.Products.Features.CreateProduct
 {
@@ -6,7 +6,8 @@ namespace Catalog.Products.Features.CreateProduct
 
     public record CreateProductResult(Guid Id);
 
-    public class CreateProductHandler(CatalogDbContext dbContext) : ICommandHandler<CreateProductCommand, CreateProductResult>
+    public class CreateProductHandler(CatalogDbContext dbContext, ILogger<CreateProductHandler> logger)
+        : ICommandHandler<CreateProductCommand, CreateProductResult>
     {
         public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
         {
