@@ -3,6 +3,7 @@
 ## Features:
 
 - Modular Monolith Architecture
+- Dependency Injection
 - Vertical slice architecture for modules
 - CQRS (Command Query Responsibility Segregation) via MediatR Nugget package
 - Carter nugget package for minimal APIs endpoints
@@ -13,6 +14,7 @@
 - Docker and docker-compose for containerization
 - PostGresql as the database from docker-compose
 - Entity Framework Core for data access
+- Migrations and Data Seed
 - DTos for data transfer
 - Behaviors for logging and validation via MaediarR pipeline implementation
 - Mapster Nugget package for object mapping
