@@ -1,6 +1,4 @@
-﻿using Shared.DDD;
-
-namespace Basket.Models
+﻿namespace Basket.Models
 {
     public class ShoppingCartItem : Entity<Guid>
     {
@@ -21,6 +19,12 @@ namespace Basket.Models
             Color = color;
             Price = price;
             ProductName = productName;
+        }
+
+        public void UpdatePrice(decimal newPrice)
+        {
+            ArgumentOutOfRangeException.ThrowIfNegativeOrZero(newPrice);
+            Price = newPrice;
         }
     }
 }

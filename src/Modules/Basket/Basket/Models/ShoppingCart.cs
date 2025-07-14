@@ -13,13 +13,13 @@ namespace Basket.Models
 
         private ShoppingCart() { }
 
-        public static ShoppingCart Create(Guid id, string userName)
+        public static ShoppingCart Create(string userName)
         {
             ArgumentException.ThrowIfNullOrEmpty(userName);
 
             var shoppingCart = new ShoppingCart
             {
-                Id = id,
+                Id = Guid.NewGuid(),
                 UserName = userName
             };
 
