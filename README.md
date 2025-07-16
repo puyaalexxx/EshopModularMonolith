@@ -14,9 +14,13 @@
 - Docker and docker-compose for containerization
 - PostGresql as the database from docker-compose
 - Entity Framework Core for data access
+- Repository pattern for data access abstraction
 - Migrations and Data Seed
 - DTos for data transfer
 - Behaviors for logging and validation via MaediarR pipeline implementation
 - Mapster Nugget package for object mapping
 - Serilog for structured logging
 - Serilog Sinqs Seq via docker compose
+- REdis cache implementation
+- Scrutor Nugget Package for assembly scanning and registration
+- 

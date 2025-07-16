@@ -11,6 +11,12 @@ services:
     volumes:
       - postgres_eshopdb:/var/lib/postgresql/data/
 
+  distributedcache:
+    container_name: distributedcache
+    restart: always
+    ports:
+      - "6379:6379"
+
   eshop-seq:
     container_name: seq
     environment:
@@ -50,7 +56,7 @@ services:
       - Serilog__Properties__Environment=Development
     depends_on:
       - eshopdb
-     # - distributedcache
+      - distributedcache
       - eshop-seq
     #  - messagebus
     #  - identity

@@ -1,5 +1,4 @@
-﻿using Basket.Data.Repository;
-using Microsoft.EntityFrameworkCore.Diagnostics;
+﻿using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Shared.Data;
 using Shared.Data.Interceptors;
@@ -12,6 +11,14 @@ namespace Basket
         {
             //Application Use Case services
             services.AddScoped<IBasketRepository, BasketRepository>();
+            /*services.AddScoped<IBasketRepository>(provider =>
+            {
+                var basketRepository = provider.GetRequiredService<BasketRepository>();
+
+                return new CachedBasketRepository(basketRepository, provider.GetRequiredService<IDistributedCache>());
+            });*/
+            //Scrutor
+            services.Decorate<IBasketRepository, CachedBasketRepository>();
 
             //Data - Infrastructure services
             var connectionString = configuration.GetConnectionString("Database");

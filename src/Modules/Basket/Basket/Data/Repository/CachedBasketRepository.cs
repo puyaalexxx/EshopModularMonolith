@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Caching.Distributed;
+﻿using Basket.Data.JsonConverters;
+using Microsoft.Extensions.Caching.Distributed;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -21,6 +22,7 @@ namespace Basket.Data.Repository
             }
 
             var cachedBasket = await cache.GetStringAsync(userName, cancellationToken);
+
             if (!string.IsNullOrEmpty(cachedBasket))
             {
                 return JsonSerializer.Deserialize<ShoppingCart>(cachedBasket, _options)!;
