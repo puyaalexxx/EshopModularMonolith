@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Diagnostics;
+﻿using Basket.Data.Repository;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Shared.Data;
 using Shared.Data.Interceptors;
@@ -9,6 +10,9 @@ namespace Basket
     {
         public static IServiceCollection AddBasketModule(this IServiceCollection services, IConfiguration configuration)
         {
+            //Application Use Case services
+            services.AddScoped<IBasketRepository, BasketRepository>();
+
             //Data - Infrastructure services
             var connectionString = configuration.GetConnectionString("Database");
 

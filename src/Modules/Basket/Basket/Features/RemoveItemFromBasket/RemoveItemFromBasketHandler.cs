@@ -1,16 +1,20 @@
-﻿namespace Basket.Features.RemoveItemFromBasket
+﻿
+
+namespace Basket.Features.RemoveItemFromBasket
 {
     public record RemoveItemFromBasketCommand(string UserName, Guid ProductId) : ICommand<RemoveItemFromBasketResult>;
     public record RemoveItemFromBasketResult(Guid ShoppingCartId);
 
-    internal class RemoveItemFromBasketHandler(/*IBasketRepository repository*/ BasketDbContext basketDbContext)
+    internal class RemoveItemFromBasketHandler(IBasketRepository repository /*BasketDbContext basketDbContext*/)
         : ICommandHandler<RemoveItemFromBasketCommand, RemoveItemFromBasketResult>
     {
         public async Task<RemoveItemFromBasketResult> Handle(RemoveItemFromBasketCommand command, CancellationToken cancellationToken)
         {
-            // var shoppingCart = await repository.GetBasket(command.UserName, false, cancellationToken);
+            var shoppingCart = await repository.GetBasket(command.UserName, false, cancellationToken);
 
-            var shoppingCart = await basketDbContext.ShoppingCarts.
+            await repository.SaveChangesAsync(command.UserName, cancellationToken);
+
+            /*var shoppingCart = await basketDbContext.ShoppingCarts.
                 Include(sc => sc.Items)
                 .FirstOrDefaultAsync(sc => sc.UserName == command.UserName, cancellationToken);
 
@@ -21,8 +25,7 @@
 
             shoppingCart.RemoveItem(command.ProductId);
 
-            // await repository.SaveChangesAsync(command.UserName, cancellationToken);
-            await basketDbContext.SaveChangesAsync(cancellationToken);
+            await basketDbContext.SaveChangesAsync(cancellationToken);*/
 
             return new RemoveItemFromBasketResult(shoppingCart.Id);
         }

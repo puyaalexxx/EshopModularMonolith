@@ -1,4 +1,5 @@
-﻿global using Basket.Dtos;
+﻿global using Basket.Data.Repository;
+global using Basket.Dtos;
 global using Basket.Exceptions;
 global using Basket.Models;
 global using Carter;
