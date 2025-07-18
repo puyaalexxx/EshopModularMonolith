@@ -1,11 +1,12 @@
 ﻿using FluentValidation;
 using MediatR;
+using Shared.Contacts.CQRS;
 
 namespace Shared.Behaviors
 {
     public class ValidationBehavior<TRequest, TResponse>(IEnumerable<IValidator<TRequest>> validators)
         : IPipelineBehavior<TRequest, TResponse>
-        where TRequest : notnull, IRequest<TResponse>
+        where TRequest : notnull, ICommand<TResponse>
         where TResponse : notnull
     {
         public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)

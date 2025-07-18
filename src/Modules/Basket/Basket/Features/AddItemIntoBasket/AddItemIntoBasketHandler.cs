@@ -1,4 +1,4 @@
-﻿using Basket.Data.Repository;
+﻿using Catalog.Contracts.Products.Features.GetProductById;
 
 namespace Basket.Features.AddItemIntoBasket
 {
@@ -15,12 +15,16 @@ namespace Basket.Features.AddItemIntoBasket
             // Add shopping cart item into shopping cart
             var shoppingCart = await repository.GetBasket(command.UserName, false, cancellationToken);
 
+            var result = await sender.Send(new GetProductByIdQuery(command.ShoppingCartItem.ProductId), cancellationToken);
+
             shoppingCart.AddItem(
                    command.ShoppingCartItem.ProductId,
                    command.ShoppingCartItem.Quantity,
                    command.ShoppingCartItem.Color,
-                   command.ShoppingCartItem.Price,
-                   command.ShoppingCartItem.ProductName);
+                  /* command.ShoppingCartItem.Price,
+                   command.ShoppingCartItem.ProductName*/
+                  result.Product.Price,
+                  result.Product.Name);
 
             await repository.SaveChangesAsync(command.UserName, cancellationToken);
 

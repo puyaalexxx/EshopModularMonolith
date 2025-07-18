@@ -5,7 +5,6 @@ namespace Catalog.Products.Features.GetProducts
     public record class GetProductsQuery(PaginationRequest PaginationRequest) : IQuery<GetProductsResult>;
 
     public record GetProductsResult(PaginatedResult<ProductDto> Products);
-
     public class GetProductsByCategoryHandler(CatalogDbContext dbContext) : IQueryHandler<GetProductsQuery, GetProductsResult>
     {
         public async Task<GetProductsResult> Handle(GetProductsQuery query, CancellationToken cancellationToken)

@@ -10,5 +10,5 @@ global using MediatR;
 global using Microsoft.AspNetCore.Builder;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.Extensions.DependencyInjection;
-global using Shared.CQRS;
+global using Shared.Contacts.CQRS;
 global using Shared.DDD;

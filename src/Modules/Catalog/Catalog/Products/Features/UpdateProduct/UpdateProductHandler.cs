@@ -1,11 +1,8 @@
-﻿
-
-namespace Catalog.Products.Features.UpdateProduct
+﻿namespace Catalog.Products.Features.UpdateProduct
 {
     public record UpdateProductCommand(ProductDto Product) : ICommand<UpdateProductResult>;
 
     public record UpdateProductResult(bool IsSuccess);
-
     public class DeleteProductHandler(CatalogDbContext dbContext) : ICommandHandler<UpdateProductCommand, UpdateProductResult>
     {
         public async Task<UpdateProductResult> Handle(UpdateProductCommand command, CancellationToken cancellationToken)

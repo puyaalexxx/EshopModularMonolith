@@ -12,6 +12,8 @@ namespace Basket.Features.RemoveItemFromBasket
         {
             var shoppingCart = await repository.GetBasket(command.UserName, false, cancellationToken);
 
+            shoppingCart.RemoveItem(command.ProductId);
+
             await repository.SaveChangesAsync(command.UserName, cancellationToken);
 
             /*var shoppingCart = await basketDbContext.ShoppingCarts.

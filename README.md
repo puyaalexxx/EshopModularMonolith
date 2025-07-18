@@ -21,6 +21,6 @@
 - Mapster Nugget package for object mapping
 - Serilog for structured logging
 - Serilog Sinqs Seq via docker compose
-- REdis cache implementation
+- Redis cache implementation
 - Scrutor Nugget Package for assembly scanning and registration
 - 

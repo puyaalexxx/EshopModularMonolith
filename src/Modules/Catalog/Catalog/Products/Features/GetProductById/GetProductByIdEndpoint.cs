@@ -1,5 +1,7 @@
 ﻿
 
+using Catalog.Contracts.Products.Features.GetProductById;
+
 namespace Catalog.Products.Features.GetProductById
 {
     //public record GetProductByIdRequest();
