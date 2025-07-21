@@ -1,4 +1,4 @@
-﻿using Basket.Models;
+﻿using Basket.Basket.Models;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Basket.Data.Configurations

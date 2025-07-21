@@ -1,7 +1,7 @@
-﻿global using Basket.Data.Repository;
-global using Basket.Dtos;
-global using Basket.Exceptions;
-global using Basket.Models;
+﻿global using Basket.Basket.Dtos;
+global using Basket.Basket.Exceptions;
+global using Basket.Basket.Models;
+global using Basket.Data.Repository;
 global using Carter;
 global using Catalog.Data;
 global using FluentValidation;

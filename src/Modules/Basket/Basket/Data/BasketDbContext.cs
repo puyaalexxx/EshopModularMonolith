@@ -1,7 +1,7 @@
 ﻿
 
 
-using Basket.Models;
+using Basket.Basket.Models;
 
 namespace Catalog.Data
 {

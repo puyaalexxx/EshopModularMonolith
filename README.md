@@ -23,4 +23,6 @@
 - Serilog Sinqs Seq via docker compose
 - Redis cache implementation
 - Scrutor Nugget Package for assembly scanning and registration
+- MassTransit ugget package for message bus
+- MassTransit RabbitMQ for message broker
 - 

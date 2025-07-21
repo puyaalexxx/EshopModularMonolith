@@ -1,4 +1,6 @@
-﻿namespace Basket.Data.Repository
+﻿using Basket.Basket.Models;
+
+namespace Basket.Data.Repository
 {
     public interface IBasketRepository
     {

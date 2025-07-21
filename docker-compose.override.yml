@@ -17,7 +17,7 @@ services:
     ports:
       - "6379:6379"
 
-  eshop-seq:
+  seq:
     container_name: seq
     environment:
       - ACCEPT_EULA=Y
@@ -29,6 +29,17 @@ services:
     ports:
       - "5341:5341"
       - "9091:80"
+
+  messagebus:
+    container_name: messagebus
+    hostname: ecommerce-mq
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
 
   eshop-api:
     ports:
@@ -57,8 +68,8 @@ services:
     depends_on:
       - eshopdb
       - distributedcache
-      - eshop-seq
-    #  - messagebus
+      - seq
+      - messagebus
     #  - identity
     volumes:
       - ${USERPROFILE}/.aspnet/https:/https:ro
